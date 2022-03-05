@@ -8,14 +8,15 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
-    <div id = "content">
+<body class = "passive">
+    <div id = "content" class = "content passive">
         <div class = "header">
             BATTLESHIP
         </div>
         <div class = "main-content">
             <div class = "playerGrid" id = "playerGrid"></div>
             <div class = "computerGrid" id = "computerGrid"></div>
+           
         </div>
 
         <footer class = "footer">
@@ -26,11 +27,19 @@
             </a>
         </footer>
 
-
         <div class = "placeShips active">
+            <h1>Welcome to the Battleship!</h1>
 
+            <h2 class = "placeText" id = "placeText"></h2>
+
+            <button class = "rotateButton" id = "rotateButton">Rotate</button>
+
+            <div class = "placingGrid" id = "placingGrid"></div>
         </div>
+       
     </div>
+
+    
 
 </body>
 </html>
