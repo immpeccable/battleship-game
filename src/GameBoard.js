@@ -5,8 +5,7 @@ export default class GameBoard {
 
 
     constructor() {
-        this.player1 = new Player();
-        this.aiPlayer = new Player();
+        
         this.rotation = 1;
         this.gameBoard = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -19,14 +18,42 @@ export default class GameBoard {
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        
+        
 
         this.whichShip = "Carrier";
+        this.isfinished = false;
         this.placeShip();
+        this.playGame();
+    }
+
+    playGame(){
+
+        let computerGridCells = document.querySelectorAll(".computerCell");
+        let me = this;
+        for(let i = 0; i < 100; i++){
+
+            computerGridCells[i].addEventListener('click', (event) =>{
+
+                let id = event.target.id;
+                computerGridCells[id].classList.add("miss");
+
+            })
+
+        } 
+
+        while(!this.isOver()){
+
+            
+
+
+
+        }
     }
 
     receiveAttack(x, y) {
 
-        this.gameBoard[x][y] = 1;
+        //this.gameBoard[x][y] = 1;
 
     }
     setRotation() {
@@ -218,12 +245,6 @@ export default class GameBoard {
                             }
                         }
                     }
-
-
-
-
-
-
                 }
 
                 function isValid(xcoor, ycoor, rotation, sl) {
@@ -233,20 +254,21 @@ export default class GameBoard {
                     let tmpy = ycoor;
 
                     let valid = true;
-                    for (let i = 0; i < sl; i++) {
-
-                        if(ycoor <= 9){
-                            
-                            if(me.gameBoard[xcoor][ycoor] == -1 ||me.gameBoard[xcoor][ycoor] == 1 ){
-                                valid = false;
-                                break;
-                            }
-
-                        }
-                        ycoor++;
-                    }
+                    
 
                     if (rotation == 1) {
+                        for (let i = 0; i < sl; i++) {
+
+                            if(ycoor <= 9){
+                                
+                                if(me.gameBoard[xcoor][ycoor] == -1 ||me.gameBoard[xcoor][ycoor] == 1 ){
+                                    valid = false;
+                                    break;
+                                }
+    
+                            }
+                            ycoor++;
+                        }
                         
                         xcoor = tmpx;
                         ycoor = tmpy;
@@ -299,14 +321,76 @@ export default class GameBoard {
                                 ycoor++;
                             }
                         }
-                        console.log("finished");
+                        console.log("finishedRow");
                         console.log(me.gameBoard);
 
                     }
                     else if (rotation == 10) {
+                        for (let i = 0; i < sl; i++) {
+
+                            if(xcoor <= 9){
+                                
+                                if(me.gameBoard[xcoor][ycoor] == -1 ||me.gameBoard[xcoor][ycoor] == 1 ){
+                                    valid = false;
+                                    break;
+                                }
+    
+                            }
+                            xcoor++;
+                        }
                         xcoor = tmpx;
                         ycoor = tmpy;
-                        console.log("to be done");
+                        if (valid) {
+                            for (let q = 0; q < sl; q++) {
+
+                                if (ycoor - 1 >= 0 && xcoor - 1 >= 0 ) {
+                                    me.gameBoard[xcoor - 1][ycoor - 1] = -1;
+                                }
+                                if (ycoor + 1 <= 9 && xcoor - 1 >= 0 ) {
+                                    me.gameBoard[xcoor - 1][ycoor + 1] = -1;
+                                }
+
+                                if (q == 0) {
+
+
+
+                                    if (xcoor - 1 >= 0 ) {
+                                        me.gameBoard[xcoor - 1][ycoor] = -1;
+                                    }
+
+
+                                }
+                                else if (q == sl - 1) {
+
+                                    console.log("sondayım" + xcoor + " " + ycoor);
+                                    
+                                    if ( ycoor - 1 >= 0 ) {
+                                        console.log("1");
+                                        me.gameBoard[xcoor][ycoor - 1] = -1;
+                                        
+                                    }
+                                    if (ycoor + 1 <= 9 ) {
+                                        console.log("2");
+                                        me.gameBoard[xcoor][ycoor + 1] = -1;
+                                    }
+                                    if ( xcoor + 1 <= 9 ) {
+                                        
+                                        me.gameBoard[xcoor+1][ycoor] = -1;
+                                    }
+                                    if ( ycoor -1 >= 0 && xcoor + 1 <= 9 &&  ycoor + 1 <= 9 ) {
+                                        
+                                        me.gameBoard[xcoor + 1][ycoor - 1] = -1;
+                                    }
+                                    if ( ycoor + 1<=9 && xcoor + 1 <= 9 ) {
+                                        
+                                        me.gameBoard[xcoor+1][ycoor + 1] = -1;
+                                    }
+                                }
+                                xcoor++;
+                            }
+                        }
+                        console.log("finishedCol");
+                        console.log(me.gameBoard);
                     }
                     console.log(valid);
                     return valid;
@@ -322,7 +406,7 @@ export default class GameBoard {
 
 
     isOver() {
-
+        return isfinished;
     }
 
 }
