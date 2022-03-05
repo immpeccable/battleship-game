@@ -1,0 +1,55 @@
+
+body{
+    margin: 0;
+}
+.header{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    height: 10vh;
+    font-size: 100px;
+    font-weight: bold;
+    margin: 0;
+    margin-top: 3%;
+}
+.playerGrid, .computerGrid{
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    width: 400px;
+    height: 400px;
+   
+    
+}
+.playerCell, .computerCell{
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.main-content{
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    align-items: center;
+    height: 60vh;
+    
+}
+
+.footer{
+    font-size: 25px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   margin-top: 13vh;
+   gap: 20px;
+}
+.githubSvg{
+    transition: transform 0.15s ease-in-out 0s;
+}
+.githubSvg:hover{
+
+    transform: scale(1.3);
+    
+}
