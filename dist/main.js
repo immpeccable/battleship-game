@@ -1,0 +1,1 @@
+(()=>{"use strict";!function(){let e=document.getElementById("playerGrid"),t=document.getElementById("computerGrid");for(let d=0;d<100;d++){let l=document.createElement("div"),c=document.createElement("div");l.classList.add("playerCell"),c.classList.add("computerCell"),c.id=d,l.id=d,e.appendChild(l),t.appendChild(c)}}()})();

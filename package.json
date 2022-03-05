@@ -1,0 +1,23 @@
+{
+  "name": "battleship-game",
+  "version": "1.0.0",
+  "description": "This is a battleship game that you can play against computer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/immpeccable/battleship-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/immpeccable/battleship-game/issues"
+  },
+  "homepage": "https://github.com/immpeccable/battleship-game#readme",
+  "devDependencies": {
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
