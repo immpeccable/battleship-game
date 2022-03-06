@@ -22,6 +22,7 @@ function initializeBoards(){
 
         cellPlayer.classList.add("playerCell");
         cellComputer.classList.add("computerCell");
+        cellComputer.classList.add("active");
         cellPlacingGrid.classList.add('placingGridCell');
 
         cellComputer.id = i;

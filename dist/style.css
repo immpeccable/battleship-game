@@ -31,7 +31,7 @@ body{
     border-right: 2px solid black;
     border-bottom: 2px solid black;
 }
-.computerCell:hover{
+.computerCell.active:hover{
     background-color: rgb(228, 224, 224);
     cursor: pointer;
 }
