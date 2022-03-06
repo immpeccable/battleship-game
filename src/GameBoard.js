@@ -1,6 +1,4 @@
-import Player from './Player';
-import Ship from './Ship'
-
+import { resetTheGame, loadEndGame } from "./index"; 
 export default class GameBoard {
 
 
@@ -81,7 +79,7 @@ export default class GameBoard {
     playGame() {
 
         let randomArray = [];
-        for(let i = 0; i<100; i++){
+        for (let i = 0; i < 100; i++) {
             randomArray.push(i);
         }
         let myBoardCells = document.querySelectorAll(".playerCell");
@@ -95,75 +93,88 @@ export default class GameBoard {
 
                     let xcoor = Math.floor(event.target.id / 10);
                     let ycoor = event.target.id % 10;
-                    if (this.computerBoard[xcoor][ycoor] == 1 ) {
+                    
+                    if (this.computerBoard[xcoor][ycoor] == 1) {
 
                         computerGridCells[event.target.id].classList.add('hit');
-                        
+
                     }
-                    else if(this.computerBoard[xcoor][ycoor] == -1 || this.computerBoard[xcoor][ycoor] == 0 ){
+                    else if (this.computerBoard[xcoor][ycoor] == -1 || this.computerBoard[xcoor][ycoor] == 0) {
                         computerGridCells[event.target.id].classList.add('miss');
                     }
 
-                    if((this.computerBoard[xcoor][ycoor] != 2)){
+                    if ((this.computerBoard[xcoor][ycoor] != 2)) {
                         console.log(this.computerBoard[xcoor][ycoor]);
                         computerGridCells[event.target.id].classList.remove('active');
                         randomArray = me.randomAttack(randomArray, myBoardCells);
                         console.log(randomArray);
-                        if(me.checkIsOver()){
-                            return;
-                        }
                         this.computerBoard[i][j] = 2;
+                    }
+                    if (me.checkIsOver()) {
+                        return;
                     }
                 })
             }
         }
     }
-    checkIsOver(){
+    checkIsOver() {
 
         let f = true;
 
-        for(let i = 0; i<10; i++){
-            for(let j = 0; j<10; j++){
-                if(this.computerBoard[i][j] == 1){
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                if (this.computerBoard[i][j] == 1) {
                     f = false;
+                    break;
                 }
             }
         }
-        if(f){
-            console.log("Player won");
+        if (f) {
+
+            loadEndGame(1);
             return true;
         }
 
-        for(let i = 0; i<10; i++){
-            for(let j = 0; j<10; j++){
-                if(this.gameBoard[i][j] == 1){
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                if (this.gameBoard[i][j] == 1) {
                     f = false;
+                    break;
                 }
             }
         }
-        if(f){
-            console.log("Computer won");
+        if (f) {
+            loadEndGame(2);
             return true;
         }
         return false;
 
-    }
-    randomAttack(rar, board){
 
-        let rat = rar[Math.floor(Math.random()* rar.length)];
+
+    }
+    resetTheGame() {
+
+        document.getElementById("placingGrid").innerHTML = "";
+        document.getElementById("playerGrid").innerHTML = "";
+        document.getElementById("computerGrid").innerHTML = "";
+
+    }
+    randomAttack(rar, board) {
+
+        let rat = rar[Math.floor(Math.random() * rar.length)];
         console.log(rat);
-        if(this.gameBoard[Math.floor(rat / 10)][rat % 10] == 1){
+        if (this.gameBoard[Math.floor(rat / 10)][rat % 10] == 1) {
             board[rat].style.backgroundColor = "rgb(153, 78, 78)";
-        }else{
+        } else {
             board[rat].style.backgroundColor = "aquamarine";
         }
-        rar = rar.filter( function(el){
+        rar = rar.filter(function (el) {
             console.log("el:" + el);
-            console.log("rat:" +rat);
-            return el!=rat;
+            console.log("rat:" + rat);
+            return el != rat;
         })
         return rar;
-        
+
     }
 
     receiveAttack(x, y) {
@@ -533,12 +544,6 @@ export default class GameBoard {
         //console.log(valid);
         return valid;
 
-    }
-
-
-
-    isOver() {
-        return this.isfinished;
     }
 
 }
